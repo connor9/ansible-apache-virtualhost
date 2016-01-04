@@ -1,14 +1,22 @@
 ---
 # Configure default Apache virtualhost
 
-- name: configure default apache virtual host
-  template: src=etc/apache2/sites-available/default.conf.j2 dest=/etc/apache2/sites-available/default # no validation currently
+- name: configure custom apache virtual host
+  template: "src=etc/apache2/sites-available/default.conf.j2 dest=/etc/apache2/sites-available/{{ apache_virtualhost_application_name }}" # no validation currently
+  when: ansible_distribution_version == "12.04"
+
+- name: enable custom apache virtual host
+  file: "src=/etc/apache2/sites-available/{{ apache_virtualhost_application_name }} dest=/etc/apache2/sites-enabled/{{ apache_virtualhost_application_name }} state=link"
   notify:
     - Restart Apache
   when: ansible_distribution_version == "12.04"
 
-- name: configure default apache virtual host
-  template: src=etc/apache2/sites-available/default.conf.j2 dest=/etc/apache2/sites-available/000-default.conf # no validation currently
+- name: configure custom apache virtual host
+  template: "src=etc/apache2/sites-available/default.conf.j2 dest=/etc/apache2/sites-available/000-{{ apache_virtualhost_application_name }}.conf" # no validation currently
+  when: ansible_distribution_version == "14.04"
+
+- name: enable custom apache virtual host
+  file: "src=/etc/apache2/sites-available/000-{{ apache_virtualhost_application_name }}.conf dest=/etc/apache2/sites-enabled/000-{{ apache_virtualhost_application_name }}.conf state=link"
   notify:
     - Restart Apache
   when: ansible_distribution_version == "14.04"

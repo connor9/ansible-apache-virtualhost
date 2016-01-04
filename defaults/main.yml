@@ -1,6 +1,13 @@
 ---
 # Default variables - inventory or playbook overrides will be respected
 
+apache_virtualhost_application_name: "default_virtualhost"
+
+# Virtual host settings
+apache_default_var_www_server_binding: 0.0.0.0
+apache_default_var_www_server_http_port: 80
+apache_default_var_www_server_https_port: 443
+
 apache_virtualhost_server_name: "{{ ansible_fqdn }}"
 apache_virtualhost_server_admin: "basweb@bas.ac.uk"
 

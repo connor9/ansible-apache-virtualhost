@@ -4,4 +4,4 @@
 - include: configure-default-virtualhost.yml
 
 - include: configure-ssl.yml
-  when: apache_default_var_www_ssl_enabled == true
+  when: apache_virtualhost_ssl_enabled == true
