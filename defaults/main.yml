@@ -1,0 +1,26 @@
+---
+# Default variables - inventory or playbook overrides will be respected
+
+apache_virtualhost_server_name: "{{ ansible_fqdn }}"
+apache_virtualhost_server_admin: "basweb@bas.ac.uk"
+
+apache_virtualhost_document_root: /var/www
+apache_virtualhost_document_root_alias: ""
+
+apache_virtualhost_options:
+  - "-Indexes"
+  - "+FollowSymLinks"
+  - "-MultiViews"
+apache_virtualhost_allowoverride: "All"
+
+# Virtual host settings: SSL
+apache_virtualhost_ssl_enabled: false
+
+apache_virtualhost_ssl_cert_path: /app/provisioning/certificates/domain
+apache_virtualhost_ssl_cert_file: certificate-including-trust-chain.crt
+
+apache_virtualhost_ssl_cert_chain_path: "{{ apache_virtualhost_ssl_cert_path }}"
+apache_virtualhost_ssl_cert_chain_file: "{{ apache_virtualhost_ssl_cert_file }}"
+
+apache_virtualhost_ssl_key_path: /etc/ssl/private
+apache_virtualhost_ssl_key_file: "certificate.key"
